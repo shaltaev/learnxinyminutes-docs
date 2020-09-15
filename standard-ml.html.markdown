@@ -2,8 +2,8 @@
 language: "Standard ML"
 filename: standardml.sml
 contributors:
-    - ["Simon Shine", "http://shine.eu.org/"]
-    - ["David Pedersen", "http://lonelyproton.com/"]
+    - ["Simon Shine", "https://simonshine.dk/"]
+    - ["David Pedersen", "https://github.com/davidpdrsn"]
     - ["James Baker", "http://www.jbaker.io/"]
     - ["Leo Zovic", "http://langnostic.inaimathi.ca/"]
     - ["Chris Wilson", "http://sencjw.com/"]
@@ -272,6 +272,9 @@ fun evenly_positioned_elems (odd::even::xs) = even::evenly_positioned_elems xs
 datatype temp =
       C of real
     | F of real
+    
+(*  Declaring a new C temp value...
+    val t: temp = C 45.0  *)
 
 fun temp_to_f t =
     case t of
@@ -476,3 +479,4 @@ fun decrement_ret x y = (x := !x - 1; y)
 * Follow the Coursera course [Programming Languages](https://www.coursera.org/course/proglang).
 * Read *[ML for the Working Programmer](https://www.cl.cam.ac.uk/~lp15/MLbook/pub-details.html)* by Larry C. Paulson.
 * Use [StackOverflow's sml tag](http://stackoverflow.com/questions/tagged/sml).
+* Solve exercises on [Exercism.io's Standard ML track](https://exercism.io/tracks/sml).

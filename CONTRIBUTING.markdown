@@ -52,6 +52,8 @@ languages:
 
 Other fields:
 
+- **category**: The category of the article. So far, can be one of *language*,
+  *tool* or *Algorithms & Data Structures*. Defaults to *language* if omitted.
 - **filename**: The filename for this article's code. It will be fetched, mashed
   together, and made downloadable.
     + For non-English articles, *filename* should   have a language-specific 
@@ -81,7 +83,7 @@ addition or not.
 
 ## Building the site locally
 
-You can buid the site locally to test your changes. Follow the steps below.
+You can build the site locally to test your changes. Follow the steps below.
 
 * Install Ruby language runtime and RubyGems. See [here](https://middlemanapp.com/basics/install/) for more details.
 * Clone or zip download the [learnxinyminutes-site](https://github.com/adambard/learnxinyminutes-site) repo.

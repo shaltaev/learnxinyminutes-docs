@@ -11,17 +11,19 @@ contributors:
     - ["Rahil Momin", "https://github.com/iamrahil"]
     - ["Gregrory Kielian", "https://github.com/gskielian"]
     - ["Etan Reisner", "https://github.com/deryni"]
-    - ["Jonathan Wang", "https://github.com/Jonathansw"]   
+    - ["Jonathan Wang", "https://github.com/Jonathansw"]
     - ["Leo Rudberg", "https://github.com/LOZORD"]
     - ["Betsy Lorton", "https://github.com/schbetsy"]
     - ["John Detter", "https://github.com/jdetter"]
     - ["Harry Mumford-Turner", "https://github.com/harrymt"]
     - ["Martin Nicholson", "https://github.com/mn113"]
 filename: LearnBash.sh
+translators:
+    - ["Dimitri Kokkonis", "https://github.com/kokkonisd"]
 ---
 
 Bash is a name of the unix shell, which was also distributed as the shell
-for the GNU operating system and as default shell on Linux and Mac OS X.
+for the GNU operating system and as the default shell on most Linux distros.
 Nearly all examples below can be a part of a shell script
 or executed directly in the shell.
 
@@ -67,7 +69,7 @@ echo '$Variable' # => $Variable
 # Parameter expansion ${ }:
 echo ${Variable} # => Some string
 # This is a simple usage of parameter expansion
-# Parameter Expansion gets a value from a variable. 
+# Parameter Expansion gets a value from a variable.
 # It "expands" or prints the value
 # During the expansion time the value or parameter can be modified
 # Below are other modifications that add onto this expansion
@@ -86,8 +88,13 @@ echo ${Variable: -5} # => tring
 # String length
 echo ${#Variable} # => 11
 
+# Indirect expansion
+OtherVariable="Variable"
+echo ${!OtherVariable} # => Some String
+# This will expand the value of OtherVariable
+
 # Default value for variable
-echo ${Foo:-"DefaultValueIfFooIsMissingOrEmpty"} 
+echo ${Foo:-"DefaultValueIfFooIsMissingOrEmpty"}
 # => DefaultValueIfFooIsMissingOrEmpty
 # This works for null (Foo=) and empty string (Foo=""); zero (Foo=0) returns 0.
 # Note that it only returns default value and doesn't change variable value.
@@ -223,7 +230,9 @@ cat file.txt
 
 # We can also read the file using `cat`:
 Contents=$(cat file.txt)
-echo "START OF FILE\n$Contents\nEND OF FILE" # "\n" prints a new line character
+# "\n" prints a new line character
+# "-e" to interpret the newline escape characters as escape characters
+echo -e "START OF FILE\n$Contents\nEND OF FILE"
 # => START OF FILE
 # => [contents of file.txt]
 # => END OF FILE
@@ -244,7 +253,7 @@ cp -r srcDirectory/ dst/ # recursively copy
 # `mv` is also useful for renaming files!
 mv s0urc3.txt dst.txt # sorry, l33t hackers...
 
-# Since bash works in the context of a current directory, you might want to 
+# Since bash works in the context of a current directory, you might want to
 # run your command in some other directory. We have cd for changing location:
 cd ~    # change to home directory
 cd      # also goes to home directory
@@ -280,7 +289,7 @@ for line in sys.stdin:
 EOF
 # Variables will be expanded if the first "EOF" is not quoted
 
-# Run the hello.py Python script with various stdin, stdout, and 
+# Run the hello.py Python script with various stdin, stdout, and
 # stderr redirections:
 python hello.py < "input.in" # pass input.in as input to the script
 
@@ -322,7 +331,7 @@ rm -r tempDir/ # recursively delete
 # current directory.
 echo "There are $(ls | wc -l) items here."
 
-# The same can be done using backticks `` but they can't be nested - 
+# The same can be done using backticks `` but they can't be nested -
 #the preferred way is to use $( ).
 echo "There are `ls | wc -l` items here."
 
@@ -442,8 +451,8 @@ grep "^foo.*bar$" file.txt | grep -v "baz"
 # and not the regex, use fgrep (or grep -F)
 fgrep "foobar" file.txt
 
-# The `trap` command allows you to execute a command whenever your script 
-# receives a signal. Here, `trap` will execute `rm` if it receives any of the 
+# The `trap` command allows you to execute a command whenever your script
+# receives a signal. Here, `trap` will execute `rm` if it receives any of the
 # three listed signals.
 trap "rm $TEMP_FILE; exit" SIGHUP SIGINT SIGTERM
 

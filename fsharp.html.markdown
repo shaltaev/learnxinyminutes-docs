@@ -14,7 +14,7 @@ The syntax of F# is different from C-style languages:
 * Curly braces are not used to delimit blocks of code. Instead, indentation is used (like Python).
 * Whitespace is used to separate parameters rather than commas.
 
-If you want to try out the code below, you can go to [tryfsharp.org](http://www.tryfsharp.org/Create) and paste it into an interactive REPL.
+If you want to try out the code below, you can go to [https://try.fsharp.org](https://try.fsharp.org) and paste it into an interactive REPL.
 
 ```csharp
 
@@ -194,7 +194,7 @@ module ListExamples =
         | [] -> printfn "the list is empty"
         | [first] -> printfn "the list has one element %A " first
         | [first; second] -> printfn "list is %A and %A" first second
-        | _ -> printfn "the list has more than two elements"
+        | first :: _ -> printfn "the list has more than two elements, first element %A" first
 
     listMatcher [1; 2; 3; 4]
     listMatcher [1; 2]
@@ -633,6 +633,6 @@ module NetCompatibilityExamples =
 
 ## More Information
 
-For more demonstrations of F#, go to the [Try F#](http://www.tryfsharp.org/Learn) site, or my [why use F#](http://fsharpforfunandprofit.com/why-use-fsharp/) series.
+For more demonstrations of F#, go to my [why use F#](http://fsharpforfunandprofit.com/why-use-fsharp/) series.
 
-Read more about F# at [fsharp.org](http://fsharp.org/).
+Read more about F# at [fsharp.org](http://fsharp.org/) and [dotnet's F# page](https://dotnet.microsoft.com/languages/fsharp).

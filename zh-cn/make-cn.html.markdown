@@ -1,5 +1,6 @@
 ---
-language: make
+category: tool
+tool: make
 contributors:
 - ["Robert Steed", "https://github.com/robochat"]
 - ["Jichao Ouyang", "https://github.com/jcouyang"]
@@ -22,7 +23,7 @@ Makefile 用于定义如何创建目标文件, 比如如何从源码到可执行
 ```make
 # 这行表示注释
 
-# 文件名一定要交 Makefile, 大小写区分, 使用 `make <target>` 生成 target
+# 文件名一定要叫 Makefile, 大小写区分, 使用 `make <target>` 生成 target
 # 如果想要取别的名字, 可以用 `make -f "filename" <target>`.
 
 # 重要的事情 - 只认识 TAB, 空格是不认的, 但是在 GNU Make 3.82 之后, 可以通过
@@ -38,7 +39,7 @@ Makefile 用于定义如何创建目标文件, 比如如何从源码到可执行
 # 	 …
 # prerequisites(依赖) 是可选的, recipe(做法) 也可以多个或者不给.
 
-# 下面这个任务没有给 prerequisites, 只会在目标文件 file0.txt 文件不存在是跑
+# 下面这个任务没有给 prerequisites, 只会在目标文件 file0.txt 文件不存在时执行
 file0.txt:
 	echo "foo" > file0.txt
 	# 试试 `make file0.txt`
@@ -46,12 +47,12 @@ file0.txt:
 	# 注意: 即使是这些注释, 如果前面有 TAB, 也会发送给 shell, 注意看 `make file0.txt` 输出
 
 # 如果提供 prerequisites, 则只有 prerequisites 比 target 新时会执行
-# 比如下面这个任务只有当 file1.txt 比 file0.txt 新时才会执行.
+# 比如下面这个任务只有当 file0.txt 比 file1.txt 新时才会执行.
 file1.txt: file0.txt
 	cat file0.txt > file1.txt
-	# 这里跟shell里的命令式一毛一样的.
+	# 这里跟shell里的命令式一模一样.
 	@cat file0.txt >> file1.txt
-	# @ 不会把命令往 stdout 打印.
+	# @ 不会把命令打印到 stdout.
 	-@echo 'hello'
 	# - 意思是发生错误了也没关系.
 	# 试试 `make file1.txt` 吧.
@@ -86,7 +87,7 @@ ex0.txt ex1.txt: maker
 maker:
 	touch ex0.txt ex1.txt
 
-# 如果定义的 phony target 与文件名重名, 可以用 .PHONY 显示的指明哪些 targets 是 phony
+# 如果定义的 phony target 与文件名重名, 可以用 .PHONY 显式地指明哪些 targets 是 phony
 .PHONY: all maker process
 # This is a special target. There are several others.
 
@@ -115,7 +116,7 @@ process: ex1.txt file0.txt
 # 模式匹配
 #-----------------------------------------------------------------------
 
-# 可以让 make 知道如何转换某些文件到别格式
+# 可以让 make 知道如何转换某些文件到其他格式
 # 比如 从 svg 到 png
 %.png: %.svg
 	inkscape --export-png $^
@@ -148,7 +149,7 @@ echo:
 	@echo $(name)
 	@echo ${name2}
 	@echo $name    # 这个会被蠢蠢的解析成 $(n)ame.
-	@echo \"$(name3)\" # 为声明的变量或扩展成空字符串.
+	@echo \"$(name3)\" # 未声明的变量会被处理成空字符串.
 	@echo $(name4)
 	@echo $(name5)
 # 你可以通过4种方式设置变量.
@@ -234,7 +235,7 @@ ls:	*
 # include foo.mk
 
 sport = tennis
-# 一些逻辑语句 if else 什么的, 顶个写
+# 流程控制语句 (如if else 等等) 顶格写
 report:
 ifeq ($(sport),tennis)
 	@echo 'game, set, match'
